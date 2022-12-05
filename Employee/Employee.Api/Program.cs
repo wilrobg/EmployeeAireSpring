@@ -48,5 +48,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapGetEmployeesEndpoint();
+app.MapEmployeeSearch();
 
 app.Run();

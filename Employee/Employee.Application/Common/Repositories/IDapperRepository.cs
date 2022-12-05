@@ -2,6 +2,6 @@
 
 public interface IDapperRepository
 {
-    Task<IEnumerable<T>> GetAsync<T>(string sql);
-    Task<T> FirstOrDefaultAsync<T>(string sql);
+    Task<IEnumerable<T>> GetAsync<T>(string sql, object? parameters = null);
+    Task<T> FirstOrDefaultAsync<T>(string sql, object? parameters = null);
 }

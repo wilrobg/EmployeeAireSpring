@@ -15,16 +15,16 @@ public class DapperRepository : IDapperRepository
         _connectionStrings = connectionStrings.Value;
     }
 
-    public Task<IEnumerable<T>> GetAsync<T>(string sql)
+    public Task<IEnumerable<T>> GetAsync<T>(string sql, object? parameters = null)
     {
         var connection = new SqlConnection(_connectionStrings.EmployeeDB);
-        return connection.QueryAsync<T>(sql);
+        return connection.QueryAsync<T>(sql, parameters);
     }
 
-    public Task<T> FirstOrDefaultAsync<T>(string sql)
+    public Task<T> FirstOrDefaultAsync<T>(string sql, object? parameters = null)
     {
         var connection = new SqlConnection(_connectionStrings.EmployeeDB);
-        return connection.QueryFirstOrDefaultAsync<T>(sql);
+        return connection.QueryFirstOrDefaultAsync<T>(sql, parameters);
     }
     
 }
