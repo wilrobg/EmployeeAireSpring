@@ -1,15 +1,16 @@
 ﻿using Employee.Application.Common.Repositories;
 using MediatR;
+using System.Text;
 
 namespace Employee.Application.Employees.Queries.EmployeeSearch;
 
-public class EmployeeSearchQuery : IRequest<EmployeeSearchResponseDto>
+public class EmployeeSearchQuery : IRequest<IEnumerable<EmployeeSearchResponseDto>>
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
 }
 
-public class EmployeeSearchQueryHandler : IRequestHandler<EmployeeSearchQuery, EmployeeSearchResponseDto>
+public class EmployeeSearchQueryHandler : IRequestHandler<EmployeeSearchQuery, IEnumerable<EmployeeSearchResponseDto>>
 {
     private readonly IDapperRepository _repository;
     public EmployeeSearchQueryHandler(IDapperRepository repository)
@@ -17,14 +18,22 @@ public class EmployeeSearchQueryHandler : IRequestHandler<EmployeeSearchQuery, E
         _repository = repository;
     }
 
-    public Task<EmployeeSearchResponseDto> Handle(EmployeeSearchQuery request, CancellationToken cancellationToken)
+    public Task<IEnumerable<EmployeeSearchResponseDto>> Handle(EmployeeSearchQuery request, CancellationToken cancellationToken)
     {
-        const string query = @"SELECT * FROM Employees
-                                WHERE
-                                EmployeeFirstName COLLATE SQL_Latin1_General_Cp1_CI_AI like CONCAT('%',@FirstName,'%')
-                                OR
-                                EmployeeLastName COLLATE SQL_Latin1_General_Cp1_CI_AI like CONCAT('%',@LastName,'%')";
+        StringBuilder queryBuilder = new("SELECT * FROM Employees\n");
 
-        return _repository.FirstOrDefaultAsync<EmployeeSearchResponseDto>(query, request);
+        if (!string.IsNullOrEmpty(request.FirstName) || !string.IsNullOrEmpty(request.LastName))
+            queryBuilder.AppendLine("WHERE");
+
+        if (!string.IsNullOrEmpty(request.FirstName))
+            queryBuilder.AppendLine(@"EmployeeFirstName COLLATE SQL_Latin1_General_Cp1_CI_AI like CONCAT('%',@FirstName,'%')");
+
+        if (!string.IsNullOrEmpty(request.FirstName) && !string.IsNullOrEmpty(request.LastName))
+            queryBuilder.AppendLine("OR");
+
+        if (!string.IsNullOrEmpty(request.LastName))
+            queryBuilder.AppendLine(@"EmployeeLastName COLLATE SQL_Latin1_General_Cp1_CI_AI like CONCAT('%',@LastName,'%')");
+
+        return _repository.GetAsync<EmployeeSearchResponseDto>(queryBuilder.ToString(), request);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Employee.Application.Employees.Queries.EmployeeSearch;
-using Employee.Application.Employees.Queries.GetEmployees;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,13 +10,14 @@ namespace Employee.Api.Endpoints.Employees
     {
         public static WebApplication MapEmployeeSearch(this WebApplication app)
         {
-            _ = app.MapPost("/api/employees/search",
-                    async ([FromServices] IMediator mediator,
-                           [FromBody] EmployeeSearchQuery request) =>
-                        Results.Ok(await mediator.Send(request)))
+            _ = app.MapGet("/api/employees/search", async (
+                        [FromServices] IMediator mediator,
+                        string? firstName, 
+                        string? lastName) =>
+                        Results.Ok(await mediator.Send(new EmployeeSearchQuery { LastName = lastName, FirstName = firstName })))
                 .WithTags("Employees")
                 .WithMetadata(new SwaggerOperationAttribute("Get employees coincidences by Firstnames or Lastnames from DB", "\n    GET /Employees/Search"))
-                .Produces<EmployeeResponseDto>(StatusCodes.Status200OK, contentType: MediaTypeNames.Application.Json);
+                .Produces<IEnumerable<EmployeeSearchResponseDto>>(StatusCodes.Status200OK, contentType: MediaTypeNames.Application.Json);
 
             return app;
         }
