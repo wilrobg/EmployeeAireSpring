@@ -55,10 +55,6 @@ app.UseGlobalExceptionHandler();
 
 app.UseHttpsRedirection();
 
-//Mapping endpoints using Minimal APIS.
-//Segregate funcionality following SOLID principles
-app.MapGetEmployeesEndpoint();
-app.MapEmployeeSearchEndpoint();
-app.MapCreateEmployeeEndpoint();
+app.MapEndpoints();
 
 app.Run();

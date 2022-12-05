@@ -1,4 +1,5 @@
 ﻿using Employee.Application.Employees.Commands.AddEmployee;
+using Employee.Application.Employees.Commands.DeleteEmployee;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -6,15 +7,15 @@ using System.Net.Mime;
 
 namespace Employee.Api.Endpoints.Employees;
 
-public static class CreateEmployeeEndpoint
+public static class DeleteEmployeeEndpoint
 {
-    public static WebApplication MapCreateEmployeeEndpoint(this WebApplication app)
+    public static WebApplication MapDeleteEmployeeEndpoint(this WebApplication app)
     {
-        _ = app.MapPost("/api/employee", async (
+        _ = app.MapDelete("/api/employee/{id:int}", async (
                         [FromServices] IMediator mediator,
-                        [FromBody] AddEmployeeCommand request) =>
+                        int id) =>
         {
-            await mediator.Send(request);
+            await mediator.Send(new DeleteEmployeeCommand { Id = id });
             return Results.Ok();
         })
             .WithTags("Employees")
