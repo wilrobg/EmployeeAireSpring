@@ -12,6 +12,7 @@ public static class AplicationBuilder
         _ = app.MapEmployeeSearchEndpoint();
         _ = app.MapCreateEmployeeEndpoint();
         _ = app.MapDeleteEmployeeEndpoint();
+        _ = app.MapUpdateEmployeeEndpoint();
 
         return app;
     }

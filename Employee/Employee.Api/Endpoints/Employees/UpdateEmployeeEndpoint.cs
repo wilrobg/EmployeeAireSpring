@@ -1,5 +1,5 @@
 ﻿using Employee.Application.Employees.Commands.AddEmployee;
-using Employee.Application.Employees.Commands.DeleteEmployee;
+using Employee.Application.Employees.Commands.UpdateEmployee;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -7,19 +7,19 @@ using System.Net.Mime;
 
 namespace Employee.Api.Endpoints.Employees;
 
-public static class DeleteEmployeeEndpoint
+public static class UpdateEmployeeEndpoint
 {
-    public static WebApplication MapDeleteEmployeeEndpoint(this WebApplication app)
+    public static WebApplication MapUpdateEmployeeEndpoint(this WebApplication app)
     {
-        _ = app.MapDelete("/api/employee/{id:int}", async (
+        _ = app.MapPut("/api/employee", async (
                         [FromServices] IMediator mediator,
-                        int id) =>
+                        [FromBody] UpdateEmployeeCommand request) =>
         {
-            await mediator.Send(new DeleteEmployeeCommand { Id = id });
+            await mediator.Send(request);
             return Results.Ok();
         })
             .WithTags("Employees")
-            .WithMetadata(new SwaggerOperationAttribute("Delete employees record", "\n    Post /Employee"))
+            .WithMetadata(new SwaggerOperationAttribute("Update employees record", "\n    Post /Employee"))
             .Produces(StatusCodes.Status200OK, contentType: MediaTypeNames.Application.Json);
 
         return app;
