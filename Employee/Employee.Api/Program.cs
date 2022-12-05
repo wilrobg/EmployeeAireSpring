@@ -1,11 +1,11 @@
-using Employee.Api.Endpoints.Employees;
+using Employee.Web.Endpoints.Employees;
 using Employee.Infrastructure;
 using Employee.Infrastructure.Seeders;
 using Employee.Application;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Employee.Infrastructure.Configuration;
-using Employee.Api.Extensions;
+using Employee.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

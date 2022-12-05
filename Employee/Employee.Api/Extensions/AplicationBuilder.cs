@@ -1,6 +1,6 @@
-﻿using Employee.Api.Endpoints.Employees;
+﻿using Employee.Web.Endpoints.Employees;
 
-namespace Employee.Api.Extensions;
+namespace Employee.Web.Extensions;
 
 public static class AplicationBuilder
 {

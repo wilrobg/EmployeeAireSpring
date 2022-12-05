@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Net.Mime;
 
-namespace Employee.Api.Endpoints.Employees;
+namespace Employee.Web.Endpoints.Employees;
 
 public static class UpdateEmployeeEndpoint
 {

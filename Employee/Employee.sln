@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.Api", "Employee.Api\Employee.Api.csproj", "{6DC2C0C6-9C47-4ACE-A9CD-F4C2E8AE3DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.Web", "Employee.Api\Employee.Web.csproj", "{6DC2C0C6-9C47-4ACE-A9CD-F4C2E8AE3DB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.Infrastructure", "Employee.Infrastructure\Employee.Infrastructure.csproj", "{77E1AE67-E82C-4060-82A6-5C46D55C4526}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.Infrastructure", "Employee.Infrastructure\Employee.Infrastructure.csproj", "{77E1AE67-E82C-4060-82A6-5C46D55C4526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee.Application", "Employee.Application\Employee.Application.csproj", "{3A9556E8-B144-4635-AA0C-0726935866A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.Application", "Employee.Application\Employee.Application.csproj", "{3A9556E8-B144-4635-AA0C-0726935866A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
