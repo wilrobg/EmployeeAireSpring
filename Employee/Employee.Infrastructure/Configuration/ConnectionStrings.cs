@@ -1,6 +1,6 @@
 ﻿namespace Employee.Infrastructure.Configuration;
 
-public class ConnectionStrings
+public record ConnectionStrings
 {
     public string EmployeeDB { get; set; }
 }

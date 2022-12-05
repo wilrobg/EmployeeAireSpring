@@ -8,14 +8,18 @@ using Employee.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//DI connection string to facilitate dapper
 builder.Services.Configure<ConnectionStrings>(
     builder.Configuration.GetSection("ConnectionStrings"));
 
+//Using EF Core just to create Database and seeding data.
 var connectionString = builder.Configuration.GetConnectionString("EmployeeDB");
 builder.Services.AddDbContext(connectionString!);
 builder.Services.AddEmployees();
 
 builder.Services.AddEndpointsApiExplorer();
+
+//Adding Swagger Annotations
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1",
@@ -33,6 +37,7 @@ builder.Services.AddSwaggerGen(options =>
     options.DocInclusionPredicate((name, api) => true);
 });
 
+//Adding Dependency Injection for each layer
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
@@ -47,6 +52,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//Mapping endpoints using Minimal APIS.
+//Segregate funcionality following SOLID principles
 app.MapGetEmployeesEndpoint();
 app.MapEmployeeSearch();
 
