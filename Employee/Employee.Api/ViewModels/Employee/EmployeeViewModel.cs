@@ -2,7 +2,7 @@
 
 namespace Employee.Web.ViewModels.Employee;
 
-public class EmployeeViewModel
+public record EmployeeViewModel
 {
     public int Id { get; set; }
     public string EmployeeLastName { get; set; }

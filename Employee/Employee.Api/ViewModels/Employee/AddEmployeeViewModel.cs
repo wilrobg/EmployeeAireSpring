@@ -2,7 +2,7 @@
 
 namespace Employee.Web.ViewModels.Employee;
 
-public class AddEmployeeViewModel
+public record AddEmployeeViewModel
 {
     [Required]
     [Display(Name = "First Name")]

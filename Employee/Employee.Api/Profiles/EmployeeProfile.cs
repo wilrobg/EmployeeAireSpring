@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Employee.Application.Employees.Commands.AddEmployee;
 using Employee.Application.Employees.Commands.UpdateEmployee;
+using Employee.Application.Employees.Queries.EmployeeSearch;
 using Employee.Application.Employees.Queries.GetById;
 using Employee.Application.Employees.Queries.GetEmployees;
 using Employee.Web.ViewModels.Employee;
@@ -14,5 +15,6 @@ public class EmployeeProfile : Profile
 		CreateMap<AddEmployeeViewModel, AddEmployeeCommand>();
         CreateMap<GetByIdResponseDto, UpdateEmployeeViewModel>();
         CreateMap<UpdateEmployeeViewModel, UpdateEmployeeCommand>();
+		CreateMap<EmployeeSearchResponseDto, EmployeeViewModel>();
     }
 }

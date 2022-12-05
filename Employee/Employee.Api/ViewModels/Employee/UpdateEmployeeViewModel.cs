@@ -1,9 +1,8 @@
-﻿using Bogus.DataSets;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Employee.Web.ViewModels.Employee;
 
-public class UpdateEmployeeViewModel
+public record UpdateEmployeeViewModel
 {
     public int Id { get; set; }
 
