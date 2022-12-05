@@ -18,7 +18,7 @@ public class EmployeeSearchQueryHandler : IRequestHandler<EmployeeSearchQuery, I
         _repository = repository;
     }
 
-    public Task<IEnumerable<EmployeeSearchResponseDto>> Handle(EmployeeSearchQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<EmployeeSearchResponseDto>> Handle(EmployeeSearchQuery request, CancellationToken cancellationToken)
     {
         StringBuilder queryBuilder = new("SELECT * FROM Employees\n");
 
@@ -34,6 +34,6 @@ public class EmployeeSearchQueryHandler : IRequestHandler<EmployeeSearchQuery, I
         if (!string.IsNullOrEmpty(request.LastName))
             queryBuilder.AppendLine(@"EmployeeLastName COLLATE SQL_Latin1_General_Cp1_CI_AI like CONCAT('%',@LastName,'%')");
 
-        return _repository.GetAsync<EmployeeSearchResponseDto>(queryBuilder.ToString(), request);
+        return await _repository.GetAsync<EmployeeSearchResponseDto>(queryBuilder.ToString(), request);
     }
 }
