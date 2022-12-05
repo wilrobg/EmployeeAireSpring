@@ -85,7 +85,7 @@ public class EmployeeController : Controller
     [HttpGet("SearchEmployee")]
     public async Task<IActionResult> SearchEmployee(IndexViewModel search)
     {
-        if (string.IsNullOrEmpty(search.SearchEmployee.EmployeeFirstName) && string.IsNullOrEmpty(search.SearchEmployee.EmployeeFirstName))
+        if (string.IsNullOrEmpty(search.SearchEmployee.EmployeeFirstName) && string.IsNullOrEmpty(search.SearchEmployee.EmployeeLastName))
             return RedirectToAction(nameof(Index));
 
         var request = new EmployeeSearchQuery { FirstName = search.SearchEmployee.EmployeeFirstName, LastName = search.SearchEmployee.EmployeeLastName };
