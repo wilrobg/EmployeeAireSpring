@@ -21,7 +21,7 @@ public static class EmployeeSeeder
             .RuleFor(x => x.EmployeeFirstName, f => f.Person.FirstName)
             .RuleFor(x => x.EmployeePhone, f => f.Phone.PhoneNumber("(###) ###-####"))
             .RuleFor(x => x.EmployeeZip, f => f.Address.ZipCode("#####"))
-            .RuleFor(x => x.HireDate, f => f.Date.Past())
+            .RuleFor(x => x.HireDate, f => f.Date.Past().Date)
             .Generate(10);
 
         context.Employees.AddRange(employees);

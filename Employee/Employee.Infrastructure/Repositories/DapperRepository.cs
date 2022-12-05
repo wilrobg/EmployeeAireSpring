@@ -27,4 +27,9 @@ public class DapperRepository : IDapperRepository
         return connection.QueryFirstOrDefaultAsync<T>(sql, parameters);
     }
     
+    public Task<int> ExecuteAsync(string sql, object? parameters = null)
+    {
+        var connection = new SqlConnection(_connectionStrings.EmployeeDB);
+        return connection.ExecuteAsync(sql, parameters);
+    }
 }

@@ -20,7 +20,7 @@ public record Employee
     public string EmployeePhone { get; set; }
 
     [Required]
-    [StringLength(5)]
+    [StringLength(10)]
     public string EmployeeZip { get; set; }
 
     [Required]

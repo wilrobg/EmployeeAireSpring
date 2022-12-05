@@ -5,6 +5,7 @@ using Employee.Application;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Employee.Infrastructure.Configuration;
+using Employee.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,11 +51,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseGlobalExceptionHandler();
+
 app.UseHttpsRedirection();
 
 //Mapping endpoints using Minimal APIS.
 //Segregate funcionality following SOLID principles
 app.MapGetEmployeesEndpoint();
-app.MapEmployeeSearch();
+app.MapEmployeeSearchEndpoint();
+app.MapCreateEmployeeEndpoint();
 
 app.Run();
