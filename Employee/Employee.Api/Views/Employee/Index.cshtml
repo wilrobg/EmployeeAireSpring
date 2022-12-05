@@ -1,0 +1,47 @@
+﻿@using Employee.Web.ViewModels.Employee;
+@{
+    ViewData["Title"] = "Employees";
+}
+@model IEnumerable<EmployeeViewModel>;
+
+<h2>Employees</h2>
+
+<p>Swagger if you want to use endpoints (located in /Endponts folder)
+    <a href="/swagger">API Documentation (Swagger)</a>
+</p>
+
+<p><a asp-action="CreateEmployee">Add employee</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Zip Code</th>
+            <th>Hire Date</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(e => employee.Id)</td>
+                <td>@Html.DisplayFor(e => employee.EmployeeFirstName)</td>
+                <td>@Html.DisplayFor(e => employee.EmployeeLastName)</td>
+                <td>@Html.DisplayFor(e => employee.EmployeePhone)</td>
+                <td>@Html.DisplayFor(e => employee.EmployeeZip)</td>
+                <td>@Html.DisplayFor(e => employee.HireDate)</td>
+                <td>
+                    <a class="btn btn-danger" asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@employee.Id">Delete</a>
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-controller="Employee" asp-action="UpdateEmployee" asp-route-id="@employee.Id">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,6 +1,5 @@
 ﻿using Employee.Application.Common.Repositories;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace Employee.Application.Employees.Commands.AddEmployee;
 

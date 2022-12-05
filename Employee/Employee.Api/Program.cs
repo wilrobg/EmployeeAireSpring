@@ -1,4 +1,3 @@
-using Employee.Web.Endpoints.Employees;
 using Employee.Infrastructure;
 using Employee.Infrastructure.Seeders;
 using Employee.Application;
@@ -6,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Employee.Infrastructure.Configuration;
 using Employee.Web.Extensions;
+using Employee.Web.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.Configure<ConnectionStrings>(
 //Using EF Core just to create Database and seeding data.
 var connectionString = builder.Configuration.GetConnectionString("EmployeeDB");
 builder.Services.AddDbContext(connectionString!);
-builder.Services.AddEmployees();
+await builder.Services.AddEmployees();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -38,9 +38,15 @@ builder.Services.AddSwaggerGen(options =>
     options.DocInclusionPredicate((name, api) => true);
 });
 
+builder.Services.AddAutoMapper(typeof(EmployeeProfile));
+
 //Adding Dependency Injection for each layer
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
+
+//Adding razor pages
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -53,7 +59,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseGlobalExceptionHandler();
 
-app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseHttpsRedirection(); 
+app.UseStaticFiles();
+app.UseCookiePolicy();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+    endpoints.MapRazorPages();
+});
 
 app.MapEndpoints();
 

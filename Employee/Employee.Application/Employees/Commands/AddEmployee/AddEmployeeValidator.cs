@@ -11,7 +11,7 @@ public class AddEmployeeValidator : AbstractValidator<AddEmployeeCommand>
         RuleFor(r => r.EmployeeLastName).NotEmpty();
         RuleFor(r => r.EmployeePhone).Must(BeValidPhone).WithMessage("EmployeePhone must meet the following format (###) ###-####");
         RuleFor(r => r.EmployeeZip).NotEmpty().MaximumLength(10);
-        RuleFor(r => r.HireDate).NotEmpty().LessThanOrEqualTo(DateTime.Today).WithMessage("HireDate must be valid");
+        RuleFor(r => r.HireDate).NotEmpty();
     }
 
     private bool BeValidPhone(string phone)

@@ -19,11 +19,11 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "Employee.Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "Employee",
       "applicationUrl": "https://localhost:7138;http://localhost:5183",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
